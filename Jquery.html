@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #ededed;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgb(255 255 255 / 10%);
+    border: 1px solid;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Lista de Usuarios</h1>
+    <ul id="user-list"></ul>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+      $(document).ready(async function() {
+    const userList = $('#user-list');
+
+    try {
+        const res = await $.ajax({
+            url: 'https://jsonplaceholder.typicode.com/users',
+            method: 'GET',
+            dataType: 'json'
+        });
+        
+        res.forEach(function(user) {
+            const li = $('<li></li>').text(user.username);
+            userList.append(li);
+        });
+    } catch (error) {
+        console.error('Hubo un problema al obtener los usuarios:', error);
+    }
+});
+
+
+    </script>
+</body>
+</html>

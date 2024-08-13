@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de nombres de usuarios</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #ededed;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgb(255 255 255 / 10%);
+    border: 1px solid;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Lista de Usuarios</h1>
+    <ul id="user-list"></ul>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+    const userList = document.getElementById('user-list');
+    const res = await axios.get('https://jsonplaceholder.typicode.com/users');
+    try {
+        
+        const users = res.data;
+        console.log(users);
+        users.forEach(function(user) {
+            const li = document.createElement('li');
+            li.textContent = user.name;
+            userList.appendChild(li);
+        });
+    } catch (error) {
+        console.error('Hubo un problema al obtener los usuarios:', error);
+    }
+});
+
+    </script>
+</body>
+</html>
